@@ -1,73 +1,35 @@
-# React + TypeScript + Vite
+# Project Tracker UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+A multi-view project management tool with Kanban, List, and Timeline views using a shared dataset.
 
-Currently, two official plugins are available:
+## Features
+- Kanban board with custom drag-and-drop
+- List view with sorting and virtual scrolling
+- Timeline (Gantt) view with date-based positioning
+- URL-based view switching
+- Avatar-based collaboration indicators
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech Stack
+- React + TypeScript
+- Zustand for state management
+- Custom CSS (no UI libraries)
 
-## React Compiler
+## Setup
+npm install  
+npm run dev  
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## State Management
+Zustand was chosen for its simplicity and minimal boilerplate. It allows a global store that keeps all views in sync without prop drilling.
 
-## Expanding the ESLint configuration
+## Virtual Scrolling
+Implemented manually using fixed row height and calculating visible items based on scroll position. This reduces DOM nodes and improves performance.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Drag and Drop
+Built using native HTML5 drag events. Task IDs are passed through dataTransfer, and state updates are handled centrally.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Lighthouse Score
+![Lighthouse](./lighthouse.png)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Live Demo
+https://project-tracker-black-six.vercel.app/
